@@ -22,20 +22,20 @@ if len(sys.argv) == 3:
 		zipPath += '.zip'
 
 		try:
-			client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-			client.connect((SERVER_IP, SERVER_PORT))
-			client.send(str(os.path.getsize(zipPath)))
+			serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			serverSocket.connect((SERVER_IP, SERVER_PORT))
+			serverSocket.send(str(os.path.getsize(zipPath)))
 			
-			if 'RECIEVED' in client.recv(8):
+			if 'RECIEVED' in serverSocket.recv(8):
 				elfName = str(sys.argv[2])
 				if not '.elf' in elfName: elfName += '.elf'
-				client.send(elfName)
+				serverSocket.send(elfName)
 				
-				if 'RECIEVED' in client.recv(8):
+				if 'RECIEVED' in serverSocket.recv(8):
 					zipFile = open(zipPath,'rb')
 					chunk = zipFile.read(1024)
 					while (chunk):
-						client.send(chunk)
+						serverSocket.send(chunk)
 						chunk = zipFile.read(1024)
 					zipFile.close()
 					print('\nData uploaded.\nPlease wait for the server to compile and return your ELF file.')
@@ -43,14 +43,14 @@ if len(sys.argv) == 3:
 					print('\nThe server is not responding at the moment!')	
 
 				os.remove(zipPath)
-				elfCompiled = client.recv(1)
-				client.send('RECIEVED')
-				fileSize = client.recv(50)
+				elfCompiled = serverSocket.recv(1)
+				serverSocket.send('RECIEVED')
+				fileSize = serverSocket.recv(50)
 				print('Recieving file of %s bits...' % fileSize)
 				buffer = ''
-				client.send('RECIEVED')
+				serverSocket.send('RECIEVED')
 
-				while len(buffer) < int(fileSize): buffer += client.recv(1024)
+				while len(buffer) < int(fileSize): buffer += serverSocket.recv(1024)
 	
 				if elfCompiled == '1': elfPath = os.path.dirname(os.path.realpath(sys.argv[0])) + '\\' + elfName
 				else: elfPath = os.path.dirname(os.path.realpath(sys.argv[0])) + '\\make_log.txt'
