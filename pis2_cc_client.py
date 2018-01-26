@@ -45,22 +45,27 @@ if len(sys.argv) == 3:
 				os.remove(zipPath)
 				elfCompiled = serverSocket.recv(1)
 				serverSocket.send('RECIEVED')
+				
+				if elfCompiled == '1': 
+					print('The ELF file was successfully compiled.')
+					filePath = os.path.dirname(os.path.realpath(sys.argv[0])) + '\\' + elfName
+				else: 
+					print('The ELF file failed to compile.')
+					filePath = os.path.dirname(os.path.realpath(sys.argv[0])) + '\\make_log.txt'
+				
 				fileSize = serverSocket.recv(50)
 				print('Recieving file of %s bits...' % fileSize)
 				buffer = ''
 				serverSocket.send('RECIEVED')
 
 				while len(buffer) < int(fileSize): buffer += serverSocket.recv(1024)
-	
-				if elfCompiled == '1': elfPath = os.path.dirname(os.path.realpath(sys.argv[0])) + '\\' + elfName
-				else: elfPath = os.path.dirname(os.path.realpath(sys.argv[0])) + '\\make_log.txt'
-				
-				elfFile = open(elfPath,'wb')
-				elfFile.write(buffer)
-				elfFile.close()
+
+				outFile = open(filePath,'wb')
+				outFile.write(buffer)
+				outFile.close()
 				
 				if EMULATOR_RUN and elfCompiled == '1':
-					cmd = [EMULATOR_PATH, '--nogui', '--console', '--elf=' + elfPath]
+					cmd = [EMULATOR_PATH, '--nogui', '--console', '--elf=' + filePath]
 					process = subprocess.Popen(cmd)		
 		except:
 			os.remove(zipPath)
