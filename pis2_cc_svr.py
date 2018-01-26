@@ -17,16 +17,16 @@ server.listen(2)
 print '\nPiS2 Cloud Compiler - listening on {}:{}'.format(TCP_IP, TCP_PORT)
 
 def sendFile(compiled, filePath):
-		clientSocket.send(compiled)
+	clientSocket.send(compiled)
+	if 'RECIEVED' in clientSocket.recv(8):
+		clientSocket.send(str(os.path.getsize(filePath)))
 		if 'RECIEVED' in clientSocket.recv(8):
-				clientSocket.send(str(os.path.getsize(filePath)))
-				if 'RECIEVED' in clientSocket.recv(8):
-						theFile = open(filePath,'rb')
-						chunk = theFile.read(1024)
-						while (chunk):
-								clientSocket.send(chunk)
-								chunk = theFile.read(1024)
-						theFile.close()
+			theFile = open(filePath,'rb')
+			chunk = theFile.read(1024)
+			while (chunk):
+				clientSocket.send(chunk)
+				chunk = theFile.read(1024)
+			theFile.close()
 				
 def handleConnection(clientSocket):
         fileSize = clientSocket.recv(50)
