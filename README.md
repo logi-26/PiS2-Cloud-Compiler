@@ -16,6 +16,7 @@ Licensed under: GNU GENERAL PUBLIC LICENSE Version 3.
 If you make any modifications or improvments to the scripts, please create a pull request to share your changes.
 
 HOW TO USE:
+
 pis2_cc_svr.py should be run on the Raspberry Pi.
 pis2_cc_client.py should be run on the system that contains your source code.
 
