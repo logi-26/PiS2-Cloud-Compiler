@@ -18,6 +18,7 @@ If you make any modifications or improvments to the scripts, please create a pul
 HOW TO USE:
 
 pis2_cc_svr.py should be run on the Raspberry Pi.
+
 pis2_cc_client.py should be run on the system that contains your source code.
 
 The pis2_cc_client.py script requires 2 parameters:
