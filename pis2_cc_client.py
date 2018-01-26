@@ -60,7 +60,7 @@ if len(sys.argv) == 3:
 				elfFile.close()
 				
 				if EMULATOR_RUN and elfCompiled == '1':
-					cmd = [EMULATOR_PATH, '--elf=' + elfPath]
+					cmd = [EMULATOR_PATH, '--nogui', '--console', '--elf=' + elfPath]
 					process = subprocess.Popen(cmd)		
 		except:
 			os.remove(zipPath)
