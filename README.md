@@ -2,6 +2,7 @@
 V0.1 by Logi26 25-01-2018.
 
 Python client/server scripts to compile a PS2 elf file on a networked Raspberry Pi.
+
 The Raspberry Pi must have the homebrew PS2 SDK installed:
 https://github.com/ps2dev/ps2sdk
 
@@ -10,7 +11,7 @@ Uses Python 2.7.0 since this is the default Python version on the latest Raspian
 Video Demo:
 https://www.youtube.com/watch?v=C94nyHbKT5o
 
-Licensed under: GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+Licensed under: GNU GENERAL PUBLIC LICENSE Version 3.
 
 If you make any modifications or improvments to the scripts, please create a pull request to share your changes.
 
