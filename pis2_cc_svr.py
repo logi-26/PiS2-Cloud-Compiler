@@ -60,11 +60,11 @@ def handleConnection(clientSocket):
         elfPath = os.getcwd() + '/' + elfName
 
         if os.path.isfile(elfPath): sendFile('1', elfPath)
-		    else: sendFile('0', makeLogPath)
+	else: sendFile('0', makeLogPath)
 
         os.chdir(os.getcwd() + '/../')
         shutil.rmtree(os.getcwd() + '/pi_compile')
-		    print 'Closing connection with client {}:{}'.format(address[0], address[1])
+	print 'Closing connection with client {}:{}'.format(address[0], address[1])
         clientSocket.close()
 
 while True:
