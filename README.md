@@ -6,6 +6,9 @@ Python client/server scripts to compile a PS2 elf file on a networked Raspberry 
 The Raspberry Pi must have the homebrew PS2 SDK installed:
 https://github.com/ps2dev/ps2sdk
 
+Here is a guide to setup the PS2 SDK on a Raspberry Pi:
+http://www.ps2-home.com/forum/viewtopic.php?f=40&t=4729
+
 Uses Python 2.7.0 since this is the default Python version on the latest Raspian OS (Strectch).
 
 Video Demo:
